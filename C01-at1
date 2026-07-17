@@ -5,6 +5,7 @@ The suitable operating system is a Multi-user Operating System.
 *It allows multiple users to access the same computer simultaneously.
 *The operating system shares CPU, memory, and storage efficiently among users.
 (B)
+Process scheduling 
 *The kernel decides which process gets the CPU and for how long.
 Memory Management
 *The kernel allocates and deallocates memory for processes and protects one process from accessing another's memory.
