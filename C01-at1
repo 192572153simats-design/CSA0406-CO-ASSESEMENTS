@@ -1,0 +1,124 @@
+
+1st QUESTION
+(A)
+The suitable operating system is a Multi-user Operating System.
+*It allows multiple users to access the same computer simultaneously.
+*The operating system shares CPU, memory, and storage efficiently among users.
+(B)
+*The kernel decides which process gets the CPU and for how long.
+Memory Management
+*The kernel allocates and deallocates memory for processes and protects one process from accessing another's memory.
+(C)
+START
+pid = fork()
+IF pid == 0
+    Display Child PID (getpid())
+ELSE
+    Display Parent PID (getpid())
+    Display Child PID (pid)
+END IF
+STOP
+
+2ND QUESTION 
+(a) System calls required for file operations
+The common system calls are:
+create() / open() – Creates or opens a file.
+write() – Writes data to the file.
+read() – Reads data from the file.
+close() – Closes the file after operations are completed.
+
+(b) Explain the purpose of any two file management system calls
+1. open()
+Opens an existing file or creates a new file (depending on flags).
+2. write():Writes data from memory to the specified file.
+read(): Reads data from a file into memory.
+close(): Closes the file, releases system resources, and ensures buffered data is saved.
+
+(C)
+START
+fd ← open("student.txt", CREATE + WRITE)
+write(fd, "Student Name")
+close(fd)
+STOP
+
+3RD QUESTION
+
+(a) System calls required to copy one file to another
+
+The common system calls are:
+open() – Open the source file.
+creat() or open() (with create/write flags) – Create or open the destination file.
+read() – Read data from the source file.
+write() – Write data to the destination file.
+close() – Close both files after the operation is complete.
+
+(b) Purpose of any two system calls
+* read()
+Reads data from an open file into a memory buffer.
+* write()
+Writes data from a memory buffer to an open file.
+Returns the number of bytes successfully written.
+
+(c) Pseudo-code to copy the contents of one file to another
+START
+Open source file in READ mode
+Create/Open destination file in WRITE mode
+WHILE (data can be read from source file)
+    Read data into buffer
+    Write buffer to destination file
+END WHILE
+Close source file
+Close destination file
+
+4TH QUESTION 
+(a) Purpose of fork() and exec() system calls
+1. fork()
+Creates a new child process by duplicating the calling (parent) process.
+After fork(), both parent and child processes execute independently.
+2. exec()
+Replaces the current process image with a new program.
+The process ID (PID) remains the same, but the old program is completely replaced by the new one.
+
+(b) Role of the wait() system call
+wait() causes the parent process to pause until one of its child processes finishes execution.
+It allows the parent to collect the child's exit status.
+It also prevents the child process from becoming a zombie process.
+
+(c) System call sequence using fork(), exec(), and wait()
+
+START
+pid = fork()
+IF (pid == 0) THEN
+    // Child process
+    exec("NewProgram")
+ELSE
+    // Parent process
+    wait()
+END IF
+STOP
+
+5TH QUESTION 
+(a) Importance of File Management
+Organizes and stores files efficiently.
+Provides secure access to files.
+Manages storage space and file retrieval.
+
+(b) Purpose of open() and close()
+open(): Opens a file and returns a file descriptor.
+close(): Closes the file and releases system resources.
+
+(c) C System Call Sequence
+#include <fcntl.h>
+#include <unistd.h>
+int main() {
+    int fd = open("sample.txt", O_RDONLY);
+    char buf[100];
+
+    read(fd, buf, sizeof(buf));
+    close(fd);
+
+    return 0;
+}
+
+
+
