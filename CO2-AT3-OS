@@ -1,0 +1,137 @@
+question1:
+Deadlock Debugging (10 Marks)
+Condition causing deadlock:
+*P1 locks R1 and waits for R2.
+*P2 locks R2 and waits for R1.
+*Both processes hold one resource while waiting for the other, creating a circular wait.
+This satisfies the deadlock conditions (mutual exclusion, hold and wait, no preemption, circular wait).
+
+Optimization:
+Use a fixed resource ordering.
+Make both processes lock resources in the same order (e.g., R1 → R2).
+This removes the circular wait and prevents deadlock.
+
+Conclusion:
+Deadlock occurs because resources are acquired in different orders. A common locking order eliminates the deadlock.
+
+question 2:
+problem Analysis
+The CPU utilization is only 30%, even though there are ready processes.
+
+Scheduler log:
+Ready → Waiting → Ready → Waiting → Ready ...
+This shows that processes spend most of their time waiting instead of executing.
+
+Execution flow:
+Process enters Ready queue.
+Gets CPU
+Performs a small amount of computation.
+Requests I/O.
+Moves to Waiting state.
+Returns to Ready after I/O completion.
+The cycle repeats.
+Because processes quickly move to Waiting state, the CPU becomes idle frequently.
+
+Effects:
+*Low CPU utilization.
+*Reduced system throughput.
+*frequent context switching.
+*increased waiting time.
+
+System-Level Optimizations:
+1. Increase Degree of Multiprogramming
+Allow more processes in memory so another ready process can execute while one waits for I/O.
+2. Use Asynchronous I/O
+The process continues execution while the operating system handles I/O in the background.
+3. Improve I/O Scheduling
+Use efficient disk scheduling algorithms to reduce I/O waiting time.
+4. Better CPU Scheduling
+Use scheduling algorithms that quickly select another ready process whenever one blocks.
+
+Conclusion
+The low CPU utilization is caused by excessive I/O waiting. Increasing multiprogramming and improving I/O handling significantly improve CPU utilization.
+
+question 3:
+
+Memory Information
+Code = 5 MB
+Heap = 150 MB
+Stack = 1 MB per thread
+Threads = 25
+Physical RAM = 2 GB
+
+Problem Analysis
+Although enough RAM exists, the application experiences frequent page faults.
+
+Reasons:
+Large heap causes scattered memory access.
+Many threads access different memory pages.
+Poor locality of reference increases page faults.
+Frequent page replacement slows execution.
+Performance Impact
+Increased page faults.
+More disk access.
+Higher execution time.
+Reduced throughput.
+
+Optimizations:
+1. Reduce Heap Usage
+Free unused objects.
+Reuse memory.
+
+2. Use Thread Pool
+Instead of creating 25 separate threads, reuse a smaller number of worker threads.
+
+3. Reduce Stack Size
+Lower stack size if full 1 MB is unnecessary.
+
+4. Optimize Memory Access
+Keep frequently accessed data close together to improve locality.
+
+Conclusion:
+The performance degradation is caused by excessive page faults due to inefficient memory usage. Reducing heap usage and using thread pools improve performance.
+
+question 4:
+Starvation Debugging
+
+Root Cause:
+P5 is in the lowest-priority queue
+Higher-priority queues (Q1 and Q2) keep getting CPU time.
+As a result, P5 waits indefinitely (starvation).
+
+Optimization
+Apply aging to gradually increase the priority of long-waiting processes.
+Allocate some CPU time to lower-priority queues.
+
+Conclusion:
+Aging ensures fairness and prevents starvation.
+
+question 5:
+Given
+Context switches = 20,000/sec
+Burst time = 2 ms
+Time quantum = 1 ms
+Very high I/O frequency
+Preemptive scheduling
+
+Execution:
+Thread executes for 1 ms.
+Quantum expires.
+Context switch occurs.
+Thread still needs another 1 ms.
+Another context switch occurs.
+High I/O frequency also causes processes to block frequently, leading to even more context switches.
+
+Optimizations:
+Increase the time quantum (e.g., 4–5 ms).
+Use asynchronous I/O or buffering to reduce blocking.
+
+Conclusion:
+Increasing the time quantum and improving I/O handling reduces context-switch overhead and improves CPU performance.
+
+
+
+
+
+
+
